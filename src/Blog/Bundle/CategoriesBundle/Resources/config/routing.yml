@@ -1,0 +1,25 @@
+BlogCategories_admin_delete:
+    pattern: /admin/category
+    defaults: { _controller: BlogCategoriesBundle:Admin:index }
+    requirements:
+        _method: GET
+
+BlogCategories_admin_create:
+    pattern: /admin/category/create
+    defaults: { _controller: BlogCategoriesBundle:Admin:create }
+    requirements:
+        _method: POST|GET
+
+BlogCategories_admin_edit:
+    pattern: /admin/category/edit
+    defaults: { _controller: BlogCategoriesBundle:Admin:edit }
+    requirements:
+        _method: POST|GET
+        id: \d+
+
+BlogCategories_admin_delete:
+    pattern: /admin/category/delete
+    defaults: { _controller: BlogCategoriesBundle:Admin:delete }
+    requirements:
+        _method: POST
+        id: \d+
