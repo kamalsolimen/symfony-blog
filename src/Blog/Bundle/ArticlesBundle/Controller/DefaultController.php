@@ -20,12 +20,17 @@ class DefaultController extends Controller
 
         $articles = $query->getResult();
 
-        return $this->render('BlogArticlesBundle:Default:index.html.twig' , ['articles'=>$articles] );
+        return $this->render('BlogArticlesBundle:Default:index.html.twig' , ['articles'=>$articles ] );
     }
 
     public function categoryAction($slug)
     {
         $repository = $this->getDoctrine()->getRepository('BlogArticlesBundle:Article');
+
+        $categoy = $this->getDoctrine()->getRepository('BlogCategoriesBundle:Category')->findOneBySlug($slug);
+
+        if (!$categoy)
+            throw $this->createNotFoundException('The category does not exist');
 
         $query = $repository->createQueryBuilder('a')
             ->where('a.isActive = 1')
@@ -37,11 +42,10 @@ class DefaultController extends Controller
 
         $articles = $query->getResult();
 
-        $categoy = $this->getDoctrine()->getRepository('BlogCategoriesBundle:Category')->findOneBySlug($slug);
 
-        return $this->render('BlogArticlesBundle:Default:index.html.twig' , [
+        return $this->render('BlogArticlesBundle:Default:category.html.twig' , [
             'articles'=>$articles,
-            'category' => $categoy
+            'category' => ($categoy)
         ] );
     }
 
@@ -58,6 +62,8 @@ class DefaultController extends Controller
 
         $article = $query->getOneOrNullResult();
 
+        if (!$article)
+            throw $this->createNotFoundException('The article does not exist');
 
         return $this->render('BlogArticlesBundle:Default:view.html.twig' , ['article'=>$article ] );
     }

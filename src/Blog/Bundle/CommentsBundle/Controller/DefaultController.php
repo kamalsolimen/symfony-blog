@@ -19,7 +19,6 @@ class DefaultController extends Controller
 
     public function createAction($article_id , Request $request)
     {
-
         $repository = $this->getDoctrine()->getRepository('BlogArticlesBundle:Article');
 
         $query = $repository->createQueryBuilder('a')
@@ -31,6 +30,8 @@ class DefaultController extends Controller
 
         $article = $query->getOneOrNullResult();
 
+        if (!$article)
+            throw $this->createNotFoundException('The article does not exist');
 
         $comment = new Comment();
         $form = $this->getForm($article_id , $comment);
@@ -53,7 +54,6 @@ class DefaultController extends Controller
 
                 $session->getFlashBag()->add('sucess', 'Save Done');
 
-
             }
             else
             {
@@ -61,9 +61,7 @@ class DefaultController extends Controller
 //                foreach ($form->getErrors(true , true) as $key => $error) {
 //                    $errors[] = $error->getMessage();
 //                }
-
                 $session->getFlashBag()->add('error', 'All fileds required');
-
             }
         }
         return $this->redirect($this->generateUrl('BlogArticles_view',  ['slug' => $article->getSlug()]) . '#comments');    }
