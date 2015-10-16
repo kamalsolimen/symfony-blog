@@ -1,7 +1,9 @@
 blog
 ====
 
-A Symfony project created on October 14, 2015, 3:04 am.
+This is a simple blog written in Symfony 2
+
+created on October 14, 2015, 3:04 am.
 
 Installation Instructions
 ==============
@@ -19,5 +21,11 @@ php app/console doctrine:schema:create
 php app/console doctrine:fixtures:load
 
 ```
+
+external bundle
+
+* doctrine-fixtures-bundle
+* cocur/slugify
+* twig/extensions
 
 
