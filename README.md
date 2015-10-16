@@ -21,7 +21,7 @@ php app/console doctrine:fixtures:load
 ```
 virtual host
 ============
-#/etc/apache2/sites-available
+[/etc/apache2/sites-available]
 
 <VirtualHost *:80>
         ServerName {}
@@ -32,7 +32,7 @@ virtual host
 
 hosts
 =====
-# /etc/hosts
+[/etc/hosts]
 
 127.0.1.2	blog.dev.loc
 
