@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="067feba4-cf7d-48e1-b439-fbcc5e9e8979" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Default/category.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/BackEnd.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/BackEnd.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Blog/Bundle/CommentsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Blog/Bundle/CommentsBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/FrontEnd.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/FrontEnd.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Admin/dashboard.html.twig" afterPath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Admin/dashboard.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Default/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Admin/list.html.twig" afterPath="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Resources/views/Admin/list.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="blog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,33 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Controller/DefaultController.php">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-33.92857" vertical-offset="285" max-vertical-offset="1444">
-              <caret line="65" column="79" selection-start-line="64" selection-start-column="8" selection-end-line="65" selection-end-column="79" />
-              <folding>
-                <element signature="e#57#114#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Blog/Bundle/CommentsBundle/Controller/DefaultController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-40.035713" vertical-offset="0" max-vertical-offset="1824">
-              <caret line="63" column="77" selection-start-line="63" selection-start-column="77" selection-end-line="63" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/app.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.54531723" vertical-offset="0" max-vertical-offset="665">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.5073431" vertical-offset="0" max-vertical-offset="874">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -75,7 +45,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Blog/Bundle/CategoriesBundle/Resources/views/Admin/create.html.twig" />
         <option value="$PROJECT_DIR$/src/Blog/Bundle/CategoriesBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/DataFixtures/ORM/LoadCategoryData.php" />
@@ -126,6 +95,7 @@
         <option value="$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Blog/Bundle/CommentsBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/web/app.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -582,14 +552,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_8.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3460452" vertical-offset="18508" max-vertical-offset="20938">
-          <caret line="987" column="9" selection-start-line="987" selection-start-column="9" selection-end-line="987" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_9.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50706214" vertical-offset="12086" max-vertical-offset="20311">
@@ -979,9 +941,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54531723" vertical-offset="0" max-vertical-offset="665">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Blog/Bundle/CommentsBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.554785" vertical-offset="0" max-vertical-offset="1824">
+          <caret line="63" column="77" selection-start-line="63" selection-start-column="77" selection-end-line="63" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Blog/Bundle/ArticlesBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-33.92857" vertical-offset="285" max-vertical-offset="1444">
+        <state vertical-scroll-proportion="1.3176144" vertical-offset="285" max-vertical-offset="1444">
           <caret line="65" column="79" selection-start-line="64" selection-start-column="8" selection-end-line="65" selection-end-column="79" />
           <folding>
             <element signature="e#57#114#0#PHP" expanded="true" />
@@ -989,18 +967,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Blog/Bundle/CommentsBundle/Controller/DefaultController.php">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-40.035713" vertical-offset="0" max-vertical-offset="1824">
-          <caret line="63" column="77" selection-start-line="63" selection-start-column="77" selection-end-line="63" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54531723" vertical-offset="0" max-vertical-offset="665">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.5073431" vertical-offset="0" max-vertical-offset="874">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
