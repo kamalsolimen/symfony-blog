@@ -1,0 +1,43 @@
+Blog_homePage:
+    pattern: /
+    defaults: { _controller: BlogArticlesBundle:Default:index }
+    requirements:
+        _method: GET
+
+BlogArticles_front_category:
+    pattern: /category/{slug}
+    defaults: { _controller: BlogArticlesBundle:Default:category }
+    requirements:
+        _method: GET
+
+BlogArticles_view:
+    pattern: /artical/{slug}
+    defaults: { _controller: BlogArticlesBundle:Default:view }
+    requirements:
+        _method: GET
+
+BlogArticles_admin_list:
+    pattern: /admin/articles
+    defaults: { _controller: BlogArticlesBundle:Admin:index }
+    requirements:
+        _method: GET
+
+BlogArticles_admin_create:
+    pattern: /admin/articles/create
+    defaults: { _controller: BlogArticlesBundle:Admin:create }
+    requirements:
+        _method: POST|GET
+
+BlogArticles_admin_edit:
+    pattern: /admin/articles/edit/{id}
+    defaults: { _controller: BlogArticlesBundle:Admin:edit }
+    requirements:
+        _method: GET|POST
+        id: \d+
+
+BlogArticles_admin_delete:
+    pattern: /admin/articles/delete
+    defaults: { _controller: BlogArticlesBundle:Admin:delete }
+    requirements:
+        _method: POST|GET
+        id: \d+

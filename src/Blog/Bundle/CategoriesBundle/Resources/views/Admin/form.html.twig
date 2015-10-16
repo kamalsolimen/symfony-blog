@@ -1,0 +1,34 @@
+{% extends 'BackEnd.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    {%  if(form_errors(form)) %}
+      <div class="alert alert-danger" role="alert">{{ form_errors(form) }}</div>
+    {% endif %}
+
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_errors(form.name) }}
+        {{ form_widget(form.name , {'attr': {'class': 'form-control'}} ) }}
+    </div>
+
+
+    <div class="form-group">
+        {{ form_label(form.file) }}
+        {{ form_errors(form.file) }}
+
+        {% if(category.image is defined  and category.image) %}
+            <div class="media-left media-middle">
+                <img class="media-object img-rounded" src="{{ asset(['uploads/categories/', category.image]|join ) }}" width="62" height="62">
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.file , {'attr': {'class': 'form-control' , 'required':'null'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+
+    {{ form_end(form) }}
+{% endblock %}

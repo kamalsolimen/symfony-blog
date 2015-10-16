@@ -8,29 +8,36 @@
 
 namespace Blog\Bundle\CategoriesBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Blog\Bundle\CategoriesBundle\Entity\Category;
+use Blog\Bundle\ArticlesBundle\Entity\Article;
 
 
 
-class LoadCategoryData implements FixtureInterface
+class LoadCategoryData extends AbstractFixture
 {
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create();
 
-        for($i=0;$i<50;$i++)
+        for($i=0;$i<10;$i++)
         {
             $name = $faker->sentence(3);
 
             $category = new Category();
             $category->setName($name);
-            $category->setDescription($faker->text());
-            $category->setSlug($name);
+            $category->setSlug();
 
             $manager->persist($category);
             $manager->flush();
+
+            $this->setReference('articles-categories', $category);
         }
+    }
+
+    public function getOrder()
+    {
+        return 1;
     }
 }

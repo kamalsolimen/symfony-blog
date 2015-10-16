@@ -1,1 +1,24 @@
-Hello {{ name }}!
+{% extends 'FrontEnd.html.twig' %}
+
+{% block body %}
+
+{% for item in articles %}
+    <h2>
+        <a href="{{ path('BlogArticles_view', { 'slug': item.slug }) }}">{{ item.title }}</a>
+    </h2>
+    <p><span class="glyphicon glyphicon-time"></span> {{ item.createdAt|date('Y-m-d H:m') }}</p>
+    <hr>
+        {% if(item.image) %}
+            ddddd<img class="img-responsive img-rounded" src="{{ asset(['uploads/articles/', item.image]|join ) }}" width="500" height="300">
+        {% else %}
+            <img class="img-responsive img-rounded" src="{{ asset('uploads/default.png') }}" width="500" height="300">
+        {% endif %}
+    <hr>
+    <p>{{ item.content | truncate(100
+        , true) }}</p>
+    <a class="btn btn-primary" href="{{ path('BlogArticles_view', { 'slug': item.slug }) }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+    <hr>
+{% endfor %}
+
+
+{% endblock %}

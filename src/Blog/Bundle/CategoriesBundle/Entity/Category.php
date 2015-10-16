@@ -4,6 +4,8 @@ namespace Blog\Bundle\CategoriesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -32,7 +34,7 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255 , unique=true)
+     * @ORM\Column(name="slug", type="string", length=255 , unique=true , nullable=true)
      */
     private $slug;
 
@@ -40,8 +42,16 @@ class Category
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255 , nullable=true)
+     *
      */
     private $image;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    private $temp;
 
     /**
      * @ORM\ManyToMany(targetEntity="Blog\Bundle\ArticlesBundle\Entity\Article", mappedBy="categories")
@@ -75,10 +85,10 @@ class Category
      *
      * @return Categories
      */
-    public function setSlug($slug)
+    public function setSlug()
     {
         $slugify = new Slugify();
-        $this->slug = $slugify->slugify($slug);
+        $this->slug = $slugify->slugify($this->getName());
 
         return $this;
     }
@@ -93,53 +103,6 @@ class Category
         return $this->slug;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Categories
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Categories
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
     /**
      * Constructor
      */
@@ -195,4 +158,98 @@ class Category
     {
         return $this->articles;
     }
+
+
+    public function getAbsolutePath()
+    {
+        return null === $this->image
+            ? null
+            : $this->getUploadRootDir().'/'.$this->image;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->image
+            ? null
+            : $this->getUploadDir().'/'.$this->image;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/categories';
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $newName = $this->getId().'-'.time().'.'.$this->getFile()->guessExtension();
+
+        $this->getFile()->move(
+            $this->getUploadRootDir(),$newName
+        );
+
+        $this->image = $newName;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Category
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function __toString() {
+        return $this->name;
+    }
+
+
 }

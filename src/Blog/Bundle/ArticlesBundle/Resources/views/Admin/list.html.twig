@@ -1,0 +1,62 @@
+{% extends 'BackEnd.html.twig' %}
+
+{% block body %}
+    <p><a href="{{ path('BlogArticles_admin_create') }}" class="btn btn-success">Create New Entry</a></p>
+    <form class="post-list" action="{{ path('BlogArticles_admin_delete') }}" method='post'>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>title</th>
+                <th>slug</th>
+                <th>is active</th>
+                <th>image</th>
+                <th>created at</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <tbody>
+            {% for item in articles %}
+                <tr>
+                    <td><input type="checkbox" name="article[]" value="{{ item.id }}" /></td>
+                    <td><a href="{{ path('BlogArticles_admin_edit', { 'id': item.id }) }}">{{ item.title }}</a></td>
+                    <td>{{ item.slug }}</td>
+                    <td>
+                        {% if(item.isActive) %}
+                            <span class="label label-success">active</span>
+                        {% else %}
+                            <span class="label label-success">deactive</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if(item.image) %}
+                            <img class="media-object img-rounded" src="{{ asset(['uploads/articles/', item.image]|join ) }}" width="62" height="62">
+                        {% else %}
+                            <img class="media-object img-rounded" src="{{ asset('uploads/default.png') }}" width="62" height="62">
+                        {% endif %}
+                    </td>
+                    <td>{{ item.createdAt|date('Y-m-d H:m') }}</td>
+                    <td>
+                        <div class="pull-right action-buttons">
+                            <a class="btn btn-success" href="{{ path('BlogArticles_admin_edit', { 'id': item.id }) }}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a class="btn btn-danger" href="{{ path('BlogArticles_admin_delete', { 'id': item.id }) }}" class="trash">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </div>
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>Posted on August 28, 2013 at 10:45 PM
+        </table>
+        <br>
+        <input class="btn btn-danger" type="submit" name="Delete" value="Delete Selected" />&nbsp;
+    </form>
+
+
+{% endblock %}

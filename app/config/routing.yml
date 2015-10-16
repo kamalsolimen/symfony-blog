@@ -1,3 +1,11 @@
 BlogCategories:
     resource: "@BlogCategoriesBundle/Resources/config/routing.yml"
     prefix:   /
+
+BlogArticles:
+    resource: "@BlogArticlesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+BlogComments:
+    resource: "@BlogCommentsBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,0 +1,52 @@
+{% extends 'BackEnd.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    {%  if(form_errors(form)) %}
+      <div class="alert alert-danger" role="alert">{{ form_errors(form) }}</div>
+    {% endif %}
+
+
+    <div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title , {'attr': {'class': 'form-control'}} ) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.content) }}
+        {{ form_errors(form.content) }}
+        {{ form_widget(form.content , {'attr': {'class': 'form-control'}} ) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.is_active) }}
+        {{ form_errors(form.is_active) }}
+        {{ form_widget(form.is_active , {'attr': {'class': 'form-control'}} ) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.categories) }}
+        {{ form_errors(form.categories) }}
+        {{ form_widget(form.categories , {'attr': {'class': 'form-control'}} ) }}
+    </div>
+
+
+    <div class="form-group">
+        {{ form_label(form.file) }}
+        {{ form_errors(form.file) }}
+
+        {% if(category.image is defined  and category.image) %}
+            <div class="media-left media-middle">
+                <img class="media-object img-rounded" src="{{ asset(['uploads/categories/', category.image]|join ) }}" width="62" height="62">
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.file , {'attr': {'class': 'form-control' , 'required':'null'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+
+    {{ form_end(form) }}
+{% endblock %}

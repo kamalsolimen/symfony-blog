@@ -3,22 +3,21 @@
 namespace Blog\Bundle\CategoriesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Response;
 use Blog\Bundle\CategoriesBundle\Entity\Category;
 
 
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/hello/{name}")
-     * @Template()
-     */
-    public function indexAction($name)
+    public function listAction()
     {
-        return array('name' => $name);
-    }
+        $repository = $this->getDoctrine()->getRepository('BlogCategoriesBundle:Category');
+        $query = $repository->createQueryBuilder('a')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery();
 
+        $categories = $query->getResult();
+
+        return $this->render('BlogCategoriesBundle:Default:list.html.twig' , ['categories'=>$categories] );
+    }
 }

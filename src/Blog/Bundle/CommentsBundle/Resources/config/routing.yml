@@ -1,0 +1,6 @@
+BlogComments_Default_create:
+    pattern: /addComment/{article_id}
+    defaults: { _controller: BlogCommentsBundle:Default:create }
+    requirements:
+        _method: POST
+        article_id: \d+

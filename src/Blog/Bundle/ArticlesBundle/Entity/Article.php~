@@ -3,6 +3,9 @@
 namespace Blog\Bundle\ArticlesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -32,7 +35,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255 , unique=true , nullable=true)
      */
     private $slug;
 
@@ -46,7 +49,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255 , nullable=true)
      */
     private $image;
 
@@ -74,6 +77,12 @@ class Article
      * @ORM\OneToMany(targetEntity="Blog\Bundle\CommentsBundle\Entity\Comment", mappedBy="article")
      */
     protected $comments;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
 
     /**
      * Get id
@@ -116,9 +125,10 @@ class Article
      *
      * @return Articles
      */
-    public function setSlug($slug)
+    public function setSlug()
     {
-        $this->slug = $slug;
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->getTitle());
 
         return $this;
     }
@@ -282,5 +292,103 @@ class Article
     public function removeCategory(\Blog\Bundle\ArticlesBundle\Entity\Category $category)
     {
         $this->categories->removeElement($category);
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Blog\Bundle\CommentsBundle\Entity\Comment $comment
+     *
+     * @return Article
+     */
+    public function addComment(\Blog\Bundle\CommentsBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Blog\Bundle\CommentsBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Blog\Bundle\CommentsBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+
+    public function getAbsolutePath()
+    {
+        return null === $this->image
+            ? null
+            : $this->getUploadRootDir().'/'.$this->image;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->image
+            ? null
+            : $this->getUploadDir().'/'.$this->image;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/articles';
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $newName = $this->getId().'-'.time().'.'.$this->getFile()->guessExtension();
+
+        $this->getFile()->move(
+            $this->getUploadRootDir(),$newName
+        );
+
+        $this->image = $newName;
     }
 }

@@ -190,4 +190,28 @@ class Comment
     {
         return $this->createdAt;
     }
+
+    /**
+     * Set article
+     *
+     * @param \Blog\Bundle\ArticlesBundle\Entity\Article $article
+     *
+     * @return Comment
+     */
+    public function setArticle(\Blog\Bundle\ArticlesBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return \Blog\Bundle\ArticlesBundle\Entity\Article
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
 }

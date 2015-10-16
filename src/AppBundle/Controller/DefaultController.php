@@ -15,6 +15,18 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        Debug::enable();
 
+        echo 'dddd';
+
+        $category = new Category();
+        $category->setName('ddd');
+        $category->setDescription('dd');
+        //$category->setSlug('dd');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($category);
+
+        echo 'ddd';
     }
 }

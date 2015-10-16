@@ -1,0 +1,16 @@
+<div class="well">
+    <h4>Blog Categories</h4>
+    <div class="row">
+        <div class="col-lg-8">
+            <ul class="list-unstyled">
+                {% for item in categories %}
+                    <li>
+                        <a href="{{ path('BlogArticles_front_category' , {'slug':item.slug}) }}">{{ item.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+    <!-- /.row -->
+</div>

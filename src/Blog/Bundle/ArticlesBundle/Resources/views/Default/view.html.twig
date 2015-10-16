@@ -1,0 +1,22 @@
+{% extends 'FrontEnd.html.twig' %}
+
+{% block body %}
+    <h2>
+        <a href="{{ path('BlogArticles_view', { 'slug': article.slug }) }}">{{ article.title }}</a>
+    </h2>
+    <p><span class="glyphicon glyphicon-time"></span> {{ article.createdAt|date('Y-m-d H:m') }}</p>
+    <hr>
+        {% if(article.image) %}
+            <img class="img-responsive img-rounded" src="{{ asset(['uploads/articles/', article.image]|join ) }}" width="900" height="300">
+        {% else %}
+            <img class="img-responsive img-rounded" src="{{ asset('uploads/default.png') }}" width="900" height="300">
+        {% endif %}
+    <hr>
+    <p>{{ article.content }}</p>
+
+
+    {% render(controller( 'BlogCommentsBundle:Default:form' , { 'article_id': article.id } )) %}
+
+    {% render(controller( 'BlogCommentsBundle:Default:list' , { 'article_id': article.id } )) %}
+
+{% endblock %}
