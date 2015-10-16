@@ -9,3 +9,14 @@ BlogArticles:
 BlogComments:
     resource: "@BlogCommentsBundle/Resources/config/routing.yml"
     prefix:   /
+
+login:
+    path: /admin/login
+    defaults: { _controller: AppBundle:Security:login}
+
+logout:
+    path: /admin/logout
+    defaults: { _controller: AppBundle:Security:logout}
+
+login_check:
+    path: /admin/login_check

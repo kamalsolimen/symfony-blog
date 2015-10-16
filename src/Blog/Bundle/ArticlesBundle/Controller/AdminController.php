@@ -10,6 +10,27 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class AdminController extends Controller
 {
+    public function dashboardAction()
+    {
+       //last article
+        $repository = $this->getDoctrine()->getRepository('BlogArticlesBundle:Article');
+        $query = $repository->createQueryBuilder('a')
+            ->setMaxResults(10)
+            ->orderBy('a.createdAt', 'DESC')
+            ->getQuery();
+        $articles = $query->getResult();
+       //last comments
+        $repository = $this->getDoctrine()->getRepository('BlogCommentsBundle:Comment');
+        $query = $repository->createQueryBuilder('a')
+            ->setMaxResults(10)
+            ->orderBy('a.createdAt', 'DESC')
+            ->getQuery();
+        $comments = $query->getResult();
+
+        return $this->render('BlogArticlesBundle:Admin:dashboard.html.twig' , ['articles'=>$articles ,
+            'comments'=>$comments] );
+    }
+
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();

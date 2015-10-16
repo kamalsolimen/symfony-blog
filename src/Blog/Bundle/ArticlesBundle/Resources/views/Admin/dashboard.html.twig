@@ -1,18 +1,18 @@
 {% extends 'BackEnd.html.twig' %}
 
 {% block body %}
-    <p><a href="{{ path('BlogArticles_admin_create') }}" class="btn btn-success">Create New Entry</a></p>
+  <div class="col-md-6">
+      <h2>Last 10 Articles</h2>
+      <hr>
     <form class="post-list" action="{{ path('BlogArticles_admin_delete') }}" method='post'>
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>&nbsp;</th>
                 <th>title</th>
                 <th>slug</th>
                 <th>is active</th>
                 <th>image</th>
                 <th>created at</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tfoot>
@@ -20,7 +20,6 @@
             <tbody>
             {% for item in articles %}
                 <tr>
-                    <td><input type="checkbox" name="article[]" value="{{ item.id }}" /></td>
                     <td><a href="{{ path('BlogArticles_admin_edit', { 'id': item.id }) }}">{{ item.title }}</a></td>
                     <td>{{ item.slug }}</td>
                     <td>
@@ -38,25 +37,56 @@
                         {% endif %}
                     </td>
                     <td>{{ item.createdAt|date('Y-m-d H:m') }}</td>
-                    <td>
-                        <div class="pull-right action-buttons">
-                            <a class="btn btn-success" href="{{ path('BlogArticles_admin_edit', { 'id': item.id }) }}">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                            <a class="btn btn-danger" href="{{ path('BlogArticles_admin_delete', { 'id': item.id }) }}" class="trash">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </div>
-
-                    </td>
 
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         <br>
-        <input class="btn btn-danger" type="submit" name="Delete" value="Delete Selected" />&nbsp;
     </form>
+  </div>
 
+
+
+    <div class="col-md-6">
+        <h2>Last 10 Comments</h2>
+        <hr>
+        <form class="post-list" action="{{ path('BlogArticles_admin_delete') }}" method='post'>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>comment</th>
+                    <th>is active</th>
+                    <th>created at</th>
+                </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                {% for item in comments %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>
+                           {{ item.comment| truncate(50 , true) }}
+                        </td>
+                        <td>
+                            {% if(item.isActive) %}
+                                <span class="label label-success">active</span>
+                            {% else %}
+                                <span class="label label-success">deactive</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.createdAt|date('Y-m-d H:m') }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        </form>
+    </div>
 
 {% endblock %}

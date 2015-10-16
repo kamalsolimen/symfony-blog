@@ -16,6 +16,11 @@ BlogArticles_view:
     requirements:
         _method: GET
 
+Blog_admin_dashboard:
+    pattern: /admin
+    defaults: { _controller: BlogArticlesBundle:Admin:dashboard }
+    requirements:
+
 BlogArticles_admin_list:
     pattern: /admin/articles
     defaults: { _controller: BlogArticlesBundle:Admin:index }

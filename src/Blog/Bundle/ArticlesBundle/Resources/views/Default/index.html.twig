@@ -9,7 +9,7 @@
     <p><span class="glyphicon glyphicon-time"></span> {{ item.createdAt|date('Y-m-d H:m') }}</p>
     <hr>
         {% if(item.image) %}
-            ddddd<img class="img-responsive img-rounded" src="{{ asset(['uploads/articles/', item.image]|join ) }}" width="500" height="300">
+            <img class="img-responsive img-rounded" src="{{ asset(['uploads/articles/', item.image]|join ) }}" width="500" height="300">
         {% else %}
             <img class="img-responsive img-rounded" src="{{ asset('uploads/default.png') }}" width="500" height="300">
         {% endif %}
