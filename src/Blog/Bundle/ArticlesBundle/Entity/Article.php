@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("title")
  */
 class Article
 {
@@ -29,6 +31,7 @@ class Article
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -74,7 +77,7 @@ class Article
     protected $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blog\Bundle\CommentsBundle\Entity\Comment", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Blog\Bundle\CommentsBundle\Entity\Comment", mappedBy="article" , cascade={"remove"})
      */
     protected $comments;
 
@@ -242,11 +245,11 @@ class Article
     /**
      * Set categories
      *
-     * @param \Blog\Bundle\ArticlesBundle\Entity\Category $categories
+     * @param \Blog\Bundle\CategoriesBundle\Entity\Category $categories
      *
      * @return Article
      */
-    public function setCategories(\Blog\Bundle\ArticlesBundle\Entity\Category $categories = null)
+    public function setCategories(\Blog\Bundle\CategoriesBundle\Entity\Category $categories = null)
     {
         $this->categories = $categories;
 
@@ -256,7 +259,7 @@ class Article
     /**
      * Get categories
      *
-     * @return \Blog\Bundle\ArticlesBundle\Entity\Category
+     * @return \Blog\Bundle\CategoriesBundle\Entity\Category
      */
     public function getCategories()
     {
@@ -273,11 +276,11 @@ class Article
     /**
      * Add category
      *
-     * @param \Blog\Bundle\ArticlesBundle\Entity\Category $category
+     * @param \Blog\Bundle\CategoriesBundle\Entity\Category $category
      *
      * @return Article
      */
-    public function addCategory(\Blog\Bundle\ArticlesBundle\Entity\Category $category)
+    public function addCategory(\Blog\Bundle\CategoriesBundle\Entity\Category $category)
     {
         $this->categories[] = $category;
 
@@ -287,9 +290,9 @@ class Article
     /**
      * Remove category
      *
-     * @param \Blog\Bundle\ArticlesBundle\Entity\Category $category
+     * @param \Blog\Bundle\CategoriesBundle\Entity\Category $category
      */
-    public function removeCategory(\Blog\Bundle\ArticlesBundle\Entity\Category $category)
+    public function removeCategory(\Blog\Bundle\CategoriesBundle\Entity\Category $category)
     {
         $this->categories->removeElement($category);
     }

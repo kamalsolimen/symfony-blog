@@ -4,3 +4,23 @@ BlogComments_Default_create:
     requirements:
         _method: POST
         article_id: \d+
+
+
+BlogComments_Admin_list:
+    pattern: /admin/comments/{id}
+    defaults: { _controller: BlogCommentsBundle:Admin:index }
+    requirements:
+        _method: GET
+
+BlogComments_admin_edit:
+    pattern: /admin/comments/edit/{id}
+    defaults: { _controller: BlogCommentsBundle:Admin:edit }
+    requirements:
+        _method: POST|GET
+        id: \d+
+
+BlogComments_admin_delete:
+    pattern: /admin/comments/delete
+    defaults: { _controller: BlogCommentsBundle:Admin:delete }
+    requirements:
+        _method: POST|GET

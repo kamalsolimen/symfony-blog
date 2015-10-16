@@ -37,7 +37,12 @@ class DefaultController extends Controller
 
         $articles = $query->getResult();
 
-        return $this->render('BlogArticlesBundle:Default:index.html.twig' , ['articles'=>$articles] );
+        $categoy = $this->getDoctrine()->getRepository('BlogCategoriesBundle:Category')->findOneBySlug($slug);
+
+        return $this->render('BlogArticlesBundle:Default:index.html.twig' , [
+            'articles'=>$articles,
+            'category' => $categoy
+        ] );
     }
 
     public function viewAction($slug)

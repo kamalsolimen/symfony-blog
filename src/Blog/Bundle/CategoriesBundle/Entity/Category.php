@@ -6,12 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Category
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("name")
  */
 class Category
 {
@@ -28,6 +30,8 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
+     *
      */
     private $name;
 
@@ -54,7 +58,7 @@ class Category
     private $temp;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Blog\Bundle\ArticlesBundle\Entity\Article", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="Blog\Bundle\ArticlesBundle\Entity\Article", mappedBy="categories" , cascade={"remove"})
      */
     protected $articles;
 
@@ -128,11 +132,11 @@ class Category
     /**
      * Add article
      *
-     * @param \Blog\Bundle\CategoriesBundle\Entity\Article $article
+     * @param \Blog\Bundle\ArticlesBundle\Entity\Article $article
      *
      * @return Category
      */
-    public function addArticle(\Blog\Bundle\CategoriesBundle\Entity\Article $article)
+    public function addArticle(\Blog\Bundle\ArticlesBundle\Entity\Article $article)
     {
         $this->articles[] = $article;
 
@@ -142,9 +146,9 @@ class Category
     /**
      * Remove article
      *
-     * @param \Blog\Bundle\CategoriesBundle\Entity\Article $article
+     * @param \Blog\Bundle\ArticlesBundle\Entity\Article $article
      */
-    public function removeArticle(\Blog\Bundle\CategoriesBundle\Entity\Article $article)
+    public function removeArticle(\Blog\Bundle\ArticlesBundle\Entity\Article $article)
     {
         $this->articles->removeElement($article);
     }

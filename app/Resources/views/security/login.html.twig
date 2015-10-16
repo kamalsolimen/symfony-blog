@@ -15,9 +15,8 @@
 <div class="container">
 
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
 
     <form class="form-signin" action="{{ path('login_check') }}" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -29,8 +28,20 @@
         <input type="hidden" name="_target_path" value="/admin" />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
 
+        <br>
+        <div class="col-md-12">
+
+            <div class="alert alert-info" role="alert">
+                <b>
+                    - username: admin<br>
+                    - password: test
+                </b>
+            </div>
+
+        </div>
+
+    </form>
 
 </div> <!-- /container -->
 

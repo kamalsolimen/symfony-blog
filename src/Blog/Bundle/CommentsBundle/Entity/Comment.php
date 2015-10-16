@@ -3,6 +3,8 @@
 namespace Blog\Bundle\CommentsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Blog\Bundle\ArticlesBundle\Entity\Article;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -25,6 +27,7 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,6 +35,11 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -39,6 +47,7 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="comment", type="text")
+     * @Assert\NotBlank()
      */
     private $comment;
 

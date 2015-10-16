@@ -1,5 +1,7 @@
 {% extends 'FrontEnd.html.twig' %}
 
+{% block title %} {{ article.title }} {% endblock %}
+
 {% block body %}
     <h2>
         <a href="{{ path('BlogArticles_view', { 'slug': article.slug }) }}">{{ article.title }}</a>

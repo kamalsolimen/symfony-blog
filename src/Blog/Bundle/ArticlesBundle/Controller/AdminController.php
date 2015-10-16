@@ -19,6 +19,7 @@ class AdminController extends Controller
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery();
         $articles = $query->getResult();
+
        //last comments
         $repository = $this->getDoctrine()->getRepository('BlogCommentsBundle:Comment');
         $query = $repository->createQueryBuilder('a')
@@ -35,7 +36,8 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em->getRepository('BlogArticlesBundle:Article')->findAll();
+        $articles = $em->getRepository('BlogArticlesBundle:Article')->findBy(array(),
+            array('id'=>'DESC'));
 
         return $this->render('BlogArticlesBundle:Admin:list.html.twig' , ['articles'=>$articles] );
     }
@@ -74,7 +76,7 @@ class AdminController extends Controller
     {
         if($item = $request->query->get('id'))
         {
-            $this->deleteArticle($item);
+            $this->deleteProcess($item);
         }
         else if($articles = $request->request->get('article'))
         {
@@ -127,6 +129,8 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('BlogArticlesBundle:Admin:form.html.twig' , ["form" => $form->createView()] );
+        return $this->render('BlogArticlesBundle:Admin:form.html.twig' , [
+            'form' => $form->createView() ,
+            'article'=>$article ] );
     }
 }

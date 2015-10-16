@@ -1,5 +1,28 @@
 {% extends 'FrontEnd.html.twig' %}
 
+{% if(category is defined) %}
+
+    {% block title %} {{ category.name }} {% endblock %}
+    {% block h1 %}
+
+        {% if(category.image is defined  and category.image) %}
+            <div class="media-left media-middle">
+                <img class="media-object img-rounded" src="{{ asset(['uploads/categories/', category.image]|join ) }}" width="500" height="150">
+            </div>
+        {% else %}
+            <div class="media-left media-middle">
+                <img class="media-object img-rounded" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=500×150&w=500&h=150" >
+            </div>
+        {% endif %}
+
+        {{ category.name }}
+
+    {% endblock %}
+
+{% endif %}
+
+
+
 {% block body %}
 
 {% for item in articles %}

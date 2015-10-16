@@ -12,8 +12,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Blog\Bundle\ArticlesBundle\Entity\Article;
-use Blog\Bundle\CategoriesBundle\Entity\Category;
-
 
 
 class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
@@ -24,39 +22,34 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 
         for($i=0;$i<10;$i++)
         {
-            $title = $faker->sentence(3);
-            $images = ['faker-1.jpg','faker-3.jpg','faker-3.jpg'];
+            for($r=0;$r<10;$r++)
+            {
+                $title = $faker->sentence(3);
+                $images = ['faker-1.jpg','faker-3.jpg','faker-3.jpg'];
 
-            $article = new Article();
-            $article->setTitle($title);
-            $article->setSlug();
-            $article->setContent($faker->realText());
-            $article->setIsActive(1);
-            $article->setImage($images[rand(0,2)]);
+                $article = new Article();
+                $article->setTitle($title);
+                $article->setSlug();
+                $article->setContent($faker->realText());
+                $article->setIsActive(1);
+                $article->setImage($images[rand(0,2)]);
 
-            //$article->setCategories( $this->getReference('articles-categories') );
-            //$article->getCategories()->add($this->getCategories($manager));
 
-            $article->setCreatedAt(new \DateTime('now'));
+                $article->addCategory( $this->getReference('cat_'.$i) );
 
-            $manager->persist($article);
-            $manager->flush();
+                $article->setCreatedAt(new \DateTime('now'));
+
+                $manager->persist($article);
+                $manager->flush();
+
+                $this->addReference('art_'.$i.$r, $article);
+            }
         }
     }
 
-    protected function getCategories($manager)
-    {
-
-        $cats = $manager->getRepository('BlogCategoriesBundle:Category')->findAll();
-        foreach($cats as $cat)
-            $ids[] = $cat->getId();
-
-        return $ids;
-
-    }
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 }

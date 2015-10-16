@@ -11,11 +11,9 @@ namespace Blog\Bundle\CategoriesBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Blog\Bundle\CategoriesBundle\Entity\Category;
-use Blog\Bundle\ArticlesBundle\Entity\Article;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-
-
-class LoadCategoryData extends AbstractFixture
+class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -32,12 +30,13 @@ class LoadCategoryData extends AbstractFixture
             $manager->persist($category);
             $manager->flush();
 
-            $this->setReference('articles-categories', $category);
+            $this->addReference('cat_'.$i, $category);
+
         }
     }
 
     public function getOrder()
     {
-        return 1;
+        return 2;
     }
 }

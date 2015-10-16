@@ -28,10 +28,11 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="{{ path('Blog_homePage') }}">Home</a>
                 </li>
+                <li><a href="{{ path('Blog_admin_dashboard') }}">Admin</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -44,9 +45,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h1 class="page-header">
-                Home Page
-            </h1>
+            <h1 class="page-header">{% block h1 %}{% endblock %}  <small>{% block h1Small %}{% endblock %}</small></h1>
 
             {% if(app.session.flashbag.has('sucess')) %}
                 <div class="alert alert-success" role="alert">

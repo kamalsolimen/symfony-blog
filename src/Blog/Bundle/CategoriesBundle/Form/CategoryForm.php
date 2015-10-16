@@ -10,24 +10,15 @@ namespace Blog\Bundle\CategoriesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoryForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
-            ->add('name')
-            ->add('file' , 'file')
+            ->add('name' , 'text' , array('label'=>'Category name' , 'required'=>false))
+            ->add('file' , 'file' , array('label'=>'Category Image' , 'required'=>false))
         ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Blog\Bundle\CategoriesBundle\Entity\Category',
-        ));
     }
 
     public function getName()

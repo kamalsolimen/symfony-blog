@@ -15,9 +15,11 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 
-class LoadUsereData implements FixtureInterface, ContainerAwareInterface
+
+class LoadUsereData implements FixtureInterface, ContainerAwareInterface ,OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -50,5 +52,9 @@ class LoadUsereData implements FixtureInterface, ContainerAwareInterface
 
         $manager->persist($user);
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        return 1;
     }
 }

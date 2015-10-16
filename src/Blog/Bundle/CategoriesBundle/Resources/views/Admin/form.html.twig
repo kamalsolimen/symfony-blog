@@ -1,6 +1,13 @@
 {% extends 'BackEnd.html.twig' %}
 
+{% block title %}Categories{% endblock %}
+{% block h1 %}Categories{% endblock %}
+
 {% block body %}
+
+    {% if(category.slug is defined  and category.slug) %}
+        <p><a href="{{ path('BlogArticles_front_category' , {'slug':category.slug}) }}" class="btn btn-info" target="_blank">Go to category front page</a></p>
+    {% endif %}
     {{ form_start(form) }}
 
     {%  if(form_errors(form)) %}
@@ -25,7 +32,7 @@
             </div>
         {% endif %}
 
-        {{ form_widget(form.file , {'attr': {'class': 'form-control' , 'required':'null'}}) }}
+        {{ form_widget(form.file , {'attr': {'class': 'form-control' }}) }}
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>

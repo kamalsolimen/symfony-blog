@@ -35,6 +35,9 @@ class DefaultController extends Controller
         $comment = new Comment();
         $form = $this->getForm($article_id , $comment);
         $form->handleRequest($request);
+
+        $session = new Session();
+
         if($request->isMethod('POST'))
         {
             if ($form->isValid())
@@ -48,13 +51,22 @@ class DefaultController extends Controller
                 $em->persist($comment);
                 $em->flush();
 
-                $session = new Session();
                 $session->getFlashBag()->add('sucess', 'Save Done');
 
-                return $this->redirect($this->generateUrl('BlogArticles_view',  ['slug' => $article->getSlug()]) . '#comments');
+
+            }
+            else
+            {
+//                $errors = array();
+//                foreach ($form->getErrors(true , true) as $key => $error) {
+//                    $errors[] = $error->getMessage();
+//                }
+
+                $session->getFlashBag()->add('error', 'All fileds required');
+
             }
         }
-    }
+        return $this->redirect($this->generateUrl('BlogArticles_view',  ['slug' => $article->getSlug()]) . '#comments');    }
 
     public function listAction($article_id)
     {

@@ -1,14 +1,18 @@
 {% extends 'BackEnd.html.twig' %}
 
+{% block title %}Categories{% endblock %}
+{% block h1 %}Categories{% endblock %}
+
 {% block body %}
     <p><a href="{{ path('BlogCategories_admin_create') }}" class="btn btn-success">Create New Entry</a></p>
     <form class="post-list" action="{{ path('BlogCategories_admin_delete') }}" method='post'>
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>&nbsp;</th>
-                <th>name</th>
-                <th>image</th>
+                <th></th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Image</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -20,18 +24,22 @@
                     <td><input type="checkbox" name="category[]" value="{{ category.id }}" /></td>
                     <td><a href="{{ path('BlogCategories_admin_edit', { 'id': category.id }) }}">{{ category.name }}</a></td>
                     <td>
+                        <a href="{{ path('BlogArticles_front_category' , {'slug':category.slug}) }}"  target="_blank">{{ category.slug }}</a>
+                    </td>
+                    <td>
                         {% if(category.image) %}
                             <img class="media-object img-rounded" src="{{ asset(['uploads/categories/', category.image]|join ) }}" width="62" height="62">
                         {% else %}
                             <img class="media-object img-rounded" src="{{ asset('uploads/default.png') }}" width="62" height="62">
                         {% endif %}
                     </td>
+
                     <td>
                         <div class="pull-right action-buttons">
                             <a class="btn btn-success" href="{{ path('BlogCategories_admin_edit', { 'id': category.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
-                            <a class="btn btn-danger" href="{{ path('BlogCategories_admin_delete', { 'id': category.id }) }}" class="trash">
+                            <a class="btn btn-danger" href="{{ path('BlogCategories_admin_delete', { 'id': category.id }) }}" class="trash" onclick="return confirm('Are you sure you want to delete this item?');">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </div>
@@ -43,6 +51,6 @@
             </tbody>
         </table>
         <br>
-        <input class="btn btn-danger" type="submit" name="Delete" value="Delete Selected" />&nbsp;
+        <input class="btn btn-danger" type="submit" name="Delete" value="Delete Selected" onclick="return confirm('Are you sure you want to delete this items?');" />&nbsp;
     </form>
 {% endblock %}
